@@ -205,13 +205,14 @@ def list_my_notes(authorization: str = Header(default=None)):
 @app.get("/notes/{note_id}")
 def get_note(note_id: int, authorization: str = Header(default=None)):
     curr = get_authenticated_user(authorization)
-    # Filter by id and owner_id to block IDOR
     note = db.execute(
-        "SELECT * FROM notes WHERE id = ? AND owner_id = ?",
-        (note_id, curr["id"]),
+        "SELECT id, owner_id, title, body FROM notes WHERE id = ?",
+        (note_id,),
     ).fetchone()
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found")
+    if note["owner_id"] != curr["id"]:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Access denied")
     return dict(note)
 
 
@@ -231,7 +232,8 @@ def list_all_users(authorization: str = Header(default=None)):
     curr = get_authenticated_user(authorization)
     if not curr or not bool(curr["is_admin"]):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Administrator access required")
-    users = db.execute("SELECT * FROM users").fetchall()
+    # Exclude password hashes from response
+    users = db.execute("SELECT id, username, is_admin FROM users").fetchall()
     return [dict(u) for u in users]
 
 
