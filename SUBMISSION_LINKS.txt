@@ -1,0 +1,21 @@
+WEEK 13 LABORATORY ACTIVITY: HUNT & FIX: SECURING A WEB API
+Course: Web Systems and Technologies
+Students: Brent Gabriel & Kenneth Bautista
+
+DELIVERABLES & SUBMISSION LINKS:
+
+1. GitHub Repository Link (security-fixes branch):
+https://github.com/BrentDC-dizzy/securenotes-w13/tree/security-fixes
+
+2. Your Pull Request Link (security-fixes -> main):
+https://github.com/BrentDC-dizzy/securenotes-w13/pull/1
+Author: Brent Gabriel
+Reviewed by: Kenneth Bautista
+
+3. The PR You Reviewed Link (kenneth-fixes -> main):
+https://github.com/BrentDC-dizzy/securenotes-w13/pull/2
+Author: Kenneth Bautista
+Reviewed by: Brent Gabriel
+
+4. Peer Review Sheet:
+See PEER_REVIEW_SHEET.md (contains both the review given to PR #2 and review received on PR #1).
